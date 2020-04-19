@@ -1,0 +1,49 @@
+<!--homework#1-->
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <!--vue.js 엔진 현재 창에서 실행-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script defer src="/__/firebase/7.13.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.13.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <!--defer: 시간이 걸리는 작업을 뒤로 미루는 키워드-->
+    <title>#3</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h1>{{email}}</h1>
+        <p>{{number}}</p>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                name:'이름',
+                email:'이메일',
+                number:'학번'
+            }
+        })
+
+        window.onload = function() {
+            //firebase 데이터베이스에서 "hello" 항목에 대한
+            //원격 참조 객체 구해서 helloRef 변수에 대입
+            let infoRef = firebase.database().ref("myInfo");
+
+            //helloRef 변수가 참조하는 데이터베이스 항목이
+            //변경되자마자 실행되는 함수
+            infoRef.on('value', (snapshot) => {
+                //db항목의 값을 hello 변수에 대입
+                let info = snapshot.val();
+                //app의 title과 body 속성에 알맞은 db항목 대입
+                //값이 변경되면 즉시 재출력됨
+                app.name = info.name;
+                app.email = info.email;
+                app.number = info.number;
+            });
+        };
+
+    </script>
+</body>
+</html>
