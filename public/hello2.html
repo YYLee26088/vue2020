@@ -1,0 +1,46 @@
+<!--#2 hello.html2 생성-->
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <!--vue.js 엔진 현재 창에서 실행-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script defer src="/__/firebase/7.13.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.13.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <!--defer: 시간이 걸리는 작업을 뒤로 미루는 키워드-->
+    <title>#2</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <p>{{ body }}</p>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                title:'hello world',
+                body:'good morning'
+            }
+        })
+
+        window.onload = function() {
+            //firebase 데이터베이스에서 "hello" 항목에 대한
+            //원격 참조 객체 구해서 helloRef 변수에 대입
+            let helloRef = firebase.database().ref("hello");
+
+            //helloRef 변수가 참조하는 데이터베이스 항목이
+            //변경되자마자 실행되는 함수
+            helloRef.on('value', (snapshot) => {
+                //db항목의 값을 hello 변수에 대입
+                let hello = snapshot.val();
+                //app의 title과 body 속성에 알맞은 db항목 대입
+                //값이 변경되면 즉시 재출력됨
+                app.title = hello.title;
+                app.body = hello.body;
+            });
+        };
+
+    </script>
+</body>
+</html>
