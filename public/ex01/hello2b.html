@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!--vue.js 엔진 현재 창에서 실행-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script defer src="/__/firebase/7.13.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.13.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <!--defer: 시간이 걸리는 작업을 뒤로 미루는 키워드-->
+    <title>#4</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <p>{{ body }}</p>
+        <hr/>
+        <!--이 태그에 입력된 값을 Vue app의 **속성에 즉시 대입-->
+        <input type="text" v-model="title"/><br/>
+        <input type="text" v-model="body"/>
+        <!--저장 버튼 추가-->
+        <!--클릭 시 v-on:click에 적힌 메소드 호출-->
+        <button type="button" v-on:click="save">저장</button>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                //**속성
+                //v-model 속성값과 일치한 속성의 값이 변경된다.
+                //변경된 속성값이 화면에 출력된다
+                title: 'hello world',
+                body: 'good morning'
+            },
+            methods:{
+                //메소드 save 정의
+                save: function(){
+                    //데이터베이스의 hello 항목에 대한 참조 구하기
+                    let helloRef=firebase.database().ref("hello");
+                    //this.title, this.body는 Vue 앱의 속성
+                    //Vue 앱의 속성값(this.어쩌구)으로 만든 객체를 hello 항목에 저장
+                    helloRef.set({title:this.title, body:this.body})
+                }
+            }
+        })
+
+        window.onload = function () {
+            let helloRef = firebase.database().ref("hello");
+            helloRef.on('value', (snapshot) => {
+                let hello = snapshot.val();
+                app.title = hello.title;
+                app.body = hello.body;
+            });
+        };
+    </script>
+</body>
+
+</html>
