@@ -1,10 +1,21 @@
-let getSum=function(arr){
-    let sum=0;
-    for (let i in arr){
-        sum+=parseInt(i)
+let sum=function(arr){
+    let a=0;
+    for (let i=0;i<arr.length;i++){
+        a+=parseInt(arr[i])
     }
-    return sum;
+    return a;
 }
 
-//let arr=[1,2,3,4,5];
-console.log(getSum([1,2,3,4]))
+function test_sum(f){
+    let arr=[]
+    for(let i=0;i<5;i++){
+        arr[i]=Math.floor(Math.random()*10+1);
+    }
+    console.log("배열 "+arr)
+    console.log("합계 "+f(arr))
+    console.log("-------")
+}
+
+for(let i=0;i<5;i++){
+    test_sum(sum)
+}
