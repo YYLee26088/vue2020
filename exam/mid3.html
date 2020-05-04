@@ -3,13 +3,20 @@
     <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>#1</title>
+
+    <style>
+        div#app { padding: 30px; margin: 30px auto; max-width: 600px; }
+        span { display: inline-block; margin: 5px; padding: 8px 15px; 
+          border: 1px solid black; }
+      </style>
+    
 </head>
 <body>
     <div id="app">
         <input type="text" v-model="num" />
         <button v-on:click="create(num)">생성</button>
         <div v-if="state" style="margin-top: 20px;">
-            <span v-for="i in arr" style="border: 1px solid black; margin-right: 10px; padding: 10px;">
+            <span v-for="i in arr" >
                 {{i}}
             </span>
         </div>
@@ -29,7 +36,7 @@
                     this.state=true;
                     let arr=[];
                     for(let i=0;i<num;i++){
-                        arr[i]=Math.floor(Math.random()*10);
+                        arr[i]=Math.floor(Math.random()*9);
                     }
                     this.arr=arr
                 },
