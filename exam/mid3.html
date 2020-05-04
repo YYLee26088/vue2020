@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>#1</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="num" />
+        <button v-on:click="create(num)">생성</button>
+        <div v-if="state" style="margin-top: 20px;">
+            <span v-for="i in arr" style="border: 1px solid black; margin-right: 10px; padding: 10px;">
+                {{i}}
+            </span>
+        </div>
+        
+
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                num:0,
+                arr:[],
+                state:false
+            },
+            methods:{
+                create(num){
+                    this.state=true;
+                    let arr=[];
+                    for(let i=0;i<num;i++){
+                        arr[i]=Math.floor(Math.random()*10);
+                    }
+                    this.arr=arr
+                },
+            }
+        })
+    </script>
+</body>
+</html>

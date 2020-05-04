@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -6,13 +5,13 @@
     <title>#1</title>
 
     <style>
-        .nemo{margin: 100px;border:1px solid black; background-color: yellow; height: 200px; width: 200px;}
+        .nemo{margin-top: 50px;border:1px solid black; background-color: yellow; height: 200px; width: 200px;}
     </style>
 </head>
 <body>
-    <div id="app">
-        <button v-on:click="show">보이기</button>
-        <button v-on:click="hide">감추기</button>
+    <div id="app" style="margin: 100px;">
+        <button v-on:click="show" id="show" disabled>보이기</button>
+        <button v-on:click="hide" id="hide">감추기</button>
         <div class="nemo" v-show="state"></div>
     </div>
     <script type="text/javascript">
@@ -24,10 +23,18 @@
             },
             methods:{
                 show(){
-                    this.state=true
+                    this.state=true;
+                    btn1 = document.getElementById('show');
+                    btn2 = document.getElementById('hide');
+                    btn1.disabled = true;
+                    btn2.disabled = false;
                 },
                 hide(){
-                    this.state=false
+                    this.state=false;
+                    btn1 = document.getElementById('show');
+                    btn2 = document.getElementById('hide');
+                    btn1.disabled = false;
+                    btn2.disabled = true;
                 }
             }
         })
