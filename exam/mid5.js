@@ -11,4 +11,6 @@ function callback(a, b) {
 
 let arr2 = arr.filter(e => (e % 2) == 0)
 
+// console.log(arr)
+// console.log(arr2)
 console.log(arr2.reduce(callback))

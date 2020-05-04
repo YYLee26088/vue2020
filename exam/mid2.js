@@ -8,4 +8,5 @@ function compare(i,j){
     return j-i;
 }
 
+//console.log(arr)
 console.log(arr.sort(compare))

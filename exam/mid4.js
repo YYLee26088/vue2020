@@ -9,7 +9,7 @@ let sum=function(arr){
 function test_sum(f){
     let arr=[]
     for(let i=0;i<5;i++){
-        arr[i]=Math.floor(Math.random()*10+1);
+        arr[i]=Math.floor(Math.random()*11);
     }
     console.log("배열 "+arr)
     console.log("합계 "+f(arr))
