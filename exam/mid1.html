@@ -7,15 +7,23 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" v-model>
-        <button onclick="plus">++</button>
-        <button onclick="minus">--</button>
+        <input type="text" v-model="title" />
+        <button v-on:click="plus">++</button>
+        <button v-on:click="minus">--</button>
     </div>
     <script type="text/javascript">
         var app=new Vue({
             el:'#app',
             data:{
-
+                title:0
+            },
+            methods:{
+                plus(){
+                    this.title+=1;
+                },
+                minus(){
+                    this.title-=1;
+                }
             }
         })
     </script>

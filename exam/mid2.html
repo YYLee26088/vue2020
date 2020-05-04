@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>#1</title>
+
+    <style>
+        .nemo{margin: 100px;border:1px solid black; background-color: yellow; height: 200px; width: 200px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="show">보이기</button>
+        <button v-on:click="hide">감추기</button>
+        <div class="nemo" v-show="state"></div>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                title:0,
+                state: true
+            },
+            methods:{
+                show(){
+                    this.state=true
+                },
+                hide(){
+                    this.state=false
+                }
+            }
+        })
+    </script>
+</body>
+</html>
